@@ -5,22 +5,24 @@ import { prisma } from "../../libs/Prisma"
 import { NextApiRequest, NextApiResponse } from "next"
 import { setCookie } from "nookies"
 
+const tokenTime = 60 * 5 // 5 Minutes
+
 const LambdaAuth = async (req: NextApiRequest, res: NextApiResponse) => {
 	const { name, pass } = req.body
-	
-	const user = await prisma.users.findFirst({
+
+	const user = await prisma.user.findFirst({
 		where: {
 			name: name,
 			pass: md5(pass),
 		},
 	})
-
+	
 	if (!user) return res.status(401).send("")
 
-	const token = jwt.sign({ id: user.id }, process.env.TOKEN!!, { expiresIn: 60 })
+	const token = jwt.sign({ id: user.id }, process.env.TOKEN!!, { expiresIn: tokenTime })
 
 	setCookie({ res }, "TokenSenior", token, {
-		maxAge: 60,
+		maxAge: tokenTime,
 		path: "/",
 	})
 

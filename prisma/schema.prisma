@@ -10,10 +10,20 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Users {
-  id   Int    @id @default(autoincrement())
-  name String
-  pass String
+model User {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  pass  String
+  todos Todo[]
 
   @@map("user")
+}
+
+model Todo {
+  id       Int    @id @default(autoincrement())
+  todo     String
+  author   User  @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  @@map("todo")
 }

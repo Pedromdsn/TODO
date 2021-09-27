@@ -18,6 +18,7 @@
     "react-icons": "^4.2.0"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.5",
     "@types/md5": "^2.3.1",
     "@types/react": "^17.0.24",
     "autoprefixer": "^10.2.6",
