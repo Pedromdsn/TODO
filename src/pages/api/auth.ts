@@ -8,6 +8,7 @@ import { setCookie } from "nookies"
 const tokenTime = 60 * 5 // 5 Minutes
 
 const LambdaAuth = async (req: NextApiRequest, res: NextApiResponse) => {
+
 	const { name, pass } = req.body
 
 	const user = await prisma.user.findFirst({
@@ -16,7 +17,7 @@ const LambdaAuth = async (req: NextApiRequest, res: NextApiResponse) => {
 			pass: md5(pass),
 		},
 	})
-	
+
 	if (!user) return res.status(401).send("")
 
 	const token = jwt.sign({ id: user.id }, process.env.TOKEN!!, { expiresIn: tokenTime })
@@ -28,5 +29,6 @@ const LambdaAuth = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	return res.status(202).send("")
 }
+
 
 export default LambdaAuth

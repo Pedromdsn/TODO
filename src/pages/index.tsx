@@ -7,13 +7,14 @@ import Todo from "../components/Todo"
 import { GetServerSideProps } from "next"
 import { useForm } from "react-hook-form"
 import { prisma } from "../libs/Prisma"
-import { route } from "next/dist/server/router"
 
 export default function Home({ data }: { data: TodoPropsIndex[] }) {
 	const { register, handleSubmit } = useForm()
 
 	const submit = async (e: TodoReceivedProps) => {
-		await axios.post("/api/addtodo", {
+    console.log("1");
+    
+		await axios.post("/api/todo", {
 			todo: e.todo,
 		})
 	}
