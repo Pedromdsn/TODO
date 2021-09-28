@@ -6,24 +6,31 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/dist/client/router"
 import { FaUserAlt, FaKey } from "react-icons/fa"
+import { toast, ToastContainer } from "react-toastify"
+
+import "react-toastify/dist/ReactToastify.css"
 
 const Auth = () => {
 	const { register, handleSubmit } = useForm()
-	const [erroLogin, setErrorLogin] = useState(false)
 	const router = useRouter()
 
 	const login = async (e: AuthProps) => {
 		const user = e.name.trim()
 		const pass = e.senha.trim()
 
+		const id = toast.loading("Please wait...", { position: "bottom-right", autoClose: 5000 })
+
 		const login = await axios.post("/api/auth", {
 			user,
 			pass,
 		})
 
-		if (login.status == 202) return router.push("/")
+		if (login.status == 202) {
+			toast.update(id, { render: "Logged", type: "success", isLoading: false, autoClose: 5000 })
+			return router.push("/")
+		}
 
-		return setErrorLogin(true)
+		toast.update(id, { render: "User not Found", type: "error", isLoading: false, autoClose: 5000 })
 	}
 
 	const goToRegister = (e) => {
@@ -40,13 +47,6 @@ const Auth = () => {
 				<Inputs register={register("name")} icon={FaUserAlt} placeholder="Username" />
 				<Inputs register={register("senha")} icon={FaKey} placeholder="Password" />
 
-				<div
-					className={`${
-						erroLogin || "hidden"
-					} text-red-500 bg-red-300 px-5 py-4 border-2 border-red-500 rounded-3xl`}>
-					Password needs an uppercase letter and 8 characters.
-				</div>
-
 				<div className="flex gap-10 justify-center items-center mt-2 text-xl flex-wrap">
 					<button
 						className="border-2 border-gray-500 px-5 py-3 bg-white text-gray-600 rounded-2xl w-32"
@@ -58,6 +58,7 @@ const Auth = () => {
 					</button>
 				</div>
 			</form>
+			<ToastContainer />
 		</div>
 	)
 }

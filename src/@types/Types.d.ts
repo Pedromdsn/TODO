@@ -14,5 +14,7 @@ type TodoPropsIndex = {
 }
 
 type TodoComponentProps = {
+	id: number
 	todo: string
+	remove: any
 }
