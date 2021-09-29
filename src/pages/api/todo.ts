@@ -14,10 +14,7 @@ const LambdaAddTodo = async (req: NextApiRequest, res: NextApiResponse) => {
 		return decoded
 	})
 
-	if (!tokenDecoded?.id) {
-		res.redirect("/auth").send("")
-		return res.status(401).send("")
-	}
+	if (!tokenDecoded?.id) return res.redirect("/auth")
 
 	switch (req.method) {
 		case "POST":

@@ -2,12 +2,15 @@ import jwt from "jsonwebtoken"
 import axios from "axios"
 import Image from "next/image"
 import nookies from "nookies"
+
 import Todo from "../components/Todo"
 
+import { prisma } from "../libs/Prisma"
 import { GetServerSideProps } from "next"
 import { useForm } from "react-hook-form"
-import { prisma } from "../libs/Prisma"
 import { useState } from "react"
+
+import "react-toastify/dist/ReactToastify.css"
 
 export default function Home({ data }: { data: TodoPropsIndex[] }) {
 	const { register, handleSubmit } = useForm()
@@ -21,13 +24,17 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 	}
 
 	const remove = async (id: number) => {
-		// e.preventDefault()
+		const temp = todos.filter((e) => e.id == id)[0]
+		setTodos([...todos.filter((e) => e.id != id)])
 		const res = await axios.delete("/api/todo", {
 			data: {
 				id: id,
 			},
 		})
-		if (res.status == 201) setTodos([...todos.filter((e) => e.id != id)])
+		if (res.status != 201) {
+			//todo: error message
+			setTodos([...todos, temp])
+		}
 	}
 
 	return (

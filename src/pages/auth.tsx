@@ -2,7 +2,6 @@ import axios from "axios"
 import Image from "next/image"
 import Inputs from "../components/Inputs"
 
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/dist/client/router"
 import { FaUserAlt, FaKey } from "react-icons/fa"
@@ -13,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css"
 const Auth = () => {
 	const { register, handleSubmit } = useForm()
 	const router = useRouter()
+
 
 	const login = async (e: AuthProps) => {
 		const user = e.name.trim()
