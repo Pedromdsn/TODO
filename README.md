@@ -1,29 +1,28 @@
-# Next.js + Tailwind CSS Example
+# Senior site
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## A portfolio site, made using the latest technologies.
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+In the construction of the site, the [React.js](https://reactjs.org/) library was used with the [Next.js](https://nextjs.org/) framework and [Prisma](https://prisma.io), just with Typescript.
+In the styling of the site was used [Tailwindcss](https://tailwindcss.com/).
 
-## Preview
+## Quality:
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+<div align="center">
+<img width="80%" src="https://media.discordapp.net/attachments/657744571395997719/893168666659672146/unknown.png?width=821&height=478">
+<br>
+ 1) Benchmark test using a share host
+</div>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## Preview:
 
-## Deploy your own
+<div align="center">
+<img src="https://media.discordapp.net/attachments/657744571395997719/893168127880351874/unknown.png?width=829&height=478">
+<br>
+2) You can check the website <a href="https://seniortodo.cocoblanco.fun">here</a>
+</div>
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+## Contact
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+Discord: Coco Blanco#3873
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Site: https://cocoblanco.fun

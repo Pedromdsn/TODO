@@ -4,3 +4,4 @@ node_modules
 .next
 prisma/migrations
 .vercel
+.vscode
