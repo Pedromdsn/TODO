@@ -3,6 +3,12 @@ type AuthProps = {
 	senha: string
 }
 
+type RegisterProps = {
+	name: string
+	senha: string
+	senha1: string
+}
+
 type TodoReceivedProps = {
 	todo: string
 }
@@ -17,4 +23,11 @@ type TodoComponentProps = {
 	id: number
 	todo: string
 	remove: any
+}
+
+interface InputsProps {
+	register: any
+	icon: IconType
+	placeholder: string
+	pass?: boolean = false
 }

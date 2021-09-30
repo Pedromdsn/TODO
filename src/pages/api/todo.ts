@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { parseCookies } from "nookies"
 import { prisma } from "../../libs/Prisma"
 
-const LambdaAddTodo = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { todo: todoText, id }: { todo: string; id: number } = req.body
 	const { TokenSenior: token } = parseCookies({ req })
 
@@ -18,7 +18,7 @@ const LambdaAddTodo = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	switch (req.method) {
 		case "POST":
-			if (todoText.trim().length == 0) return res.status(401).send("")
+			if (todoText.trim().length == 0) return res.send({ status: "Todo Empty" })
 
 			const createTodo = await prisma.todo.create({
 				data: {
@@ -27,7 +27,7 @@ const LambdaAddTodo = async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 			})
 
-			return res.status(201).send(createTodo)
+			return res.send({ status: "OK", createTodo: createTodo })
 		case "DELETE":
 			const todo = await prisma.todo.findFirst({
 				where: {
@@ -36,7 +36,7 @@ const LambdaAddTodo = async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 			})
 
-			if (!todo) return res.status(401).send("")
+			if (!todo) return res.send({ status: "Todo not found" })
 
 			await prisma.todo
 				.delete({
@@ -46,10 +46,8 @@ const LambdaAddTodo = async (req: NextApiRequest, res: NextApiResponse) => {
 				})
 				.catch((e) => console.log(e))
 
-			return res.status(201).send("")
+			return res.send({ status: "OK" })
 		default:
-			res.status(404).send("")
+			res.send({ status: "Not Allowed" })
 	}
 }
-
-export default LambdaAddTodo

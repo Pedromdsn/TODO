@@ -1,10 +1,5 @@
 import { IconType } from "react-icons"
 
-interface InputsProps {
-	register: any
-	icon: IconType
-	placeholder: string
-}
 
 const Inputs = (props: InputsProps) => {
 	return (
@@ -12,7 +7,7 @@ const Inputs = (props: InputsProps) => {
 			<props.icon />
 			<input
 				{...props.register}
-				type="text"
+				type={props.pass ? "password" : "senha"}
 				placeholder={props.placeholder}
 				className="outline-none pl-5 w-60 text-xl"
 				required

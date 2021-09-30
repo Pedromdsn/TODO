@@ -20,7 +20,7 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 		const res = await axios.post("/api/todo", {
 			todo: e.todo,
 		})
-		if (res.status == 201) setTodos([...todos, res.data])
+		if (res.data.status == "Ok") setTodos([...todos, res.data])
 	}
 
 	const remove = async (id: number) => {
@@ -31,7 +31,7 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 				id: id,
 			},
 		})
-		if (res.status != 201) {
+		if (res.data.status == "Ok") {
 			//todo: error message
 			setTodos([...todos, temp])
 		}
@@ -81,8 +81,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 			authorId: token!!.id,
 		},
 	})
-
-	console.log(data)
 
 	return {
 		props: {
