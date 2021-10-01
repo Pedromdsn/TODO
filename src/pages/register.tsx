@@ -24,9 +24,16 @@ const Auth = () => {
 		if (pass1 != pass)
 			return toast.update(id, { render: "Passwords not math", type: "error", isLoading: false, autoClose: 5000 })
 
-
-		if (pass.length < 8 || pass.split("").every(e => typeof e.charAt(0) != "number" && e.charAt(0).toLowerCase() == e.charAt(0)))
-			return toast.update(id, { render: "Password need had 8 letter and 1 Password must be 8 letters and one uppercase.", type: "error", isLoading: false, autoClose: 5000 })
+		if (
+			pass.length < 8 ||
+			pass.split("").every((e) => typeof e.charAt(0) != "number" && e.charAt(0).toLowerCase() == e.charAt(0))
+		)
+			return toast.update(id, {
+				render: "Password need had 8 letter and 1 Password must be 8 letters and one uppercase.",
+				type: "error",
+				isLoading: false,
+				autoClose: 5000,
+			})
 
 		const res = await axios.post("/api/register", {
 			user,
@@ -35,8 +42,8 @@ const Auth = () => {
 
 		switch (res.data.status) {
 			case Status.OK:
-				 toast.update(id, { render: "Registered", type: "success", isLoading: false, autoClose: 5000 })
-				 break
+				toast.update(id, { render: "Registered", type: "success", isLoading: false, autoClose: 5000 })
+				break
 			case Status.DUPLICATED_NAME:
 				toast.update(id, { render: "Username in use", type: "error", isLoading: false, autoClose: 5000 })
 				return
@@ -65,12 +72,14 @@ const Auth = () => {
 
 				<div className="flex gap-10 justify-center items-center mt-2 text-xl flex-wrap">
 					<button
-						className="border-2 border-gray-500 px-5 py-3 bg-white text-gray-600 rounded-2xl w-32"
+						className="border-2 border-green-700 px-5 py-3 bg-green-400 text-green-800 rounded-2xl w-32"
+						tabIndex={0}>
+						Registrar
+					</button>
+					<button
+						className="border-2 border-gray-500 px-5 py-3 bg-white text-gray-600 rounded-2xl w-32 order-first"
 						onClick={goToAuth}>
 						Login
-					</button>
-					<button className="border-2 border-green-700 px-5 py-3 bg-green-400 text-green-800 rounded-2xl w-32">
-						Registrar
 					</button>
 				</div>
 			</form>

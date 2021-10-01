@@ -9,7 +9,9 @@ import { Status } from "../../@types/Enum"
 const tokenTime = 10 * 60 // 10 Minutes
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	const { name, pass } = req.body
+	const { name, pass } : {name: string, pass: string} = req.body
+
+	if (!pass || !name) return res.send({status: Status.UNEXPECTED_ERROR})
 
 	const user = await prisma.user.findFirst({
 		where: {

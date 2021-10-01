@@ -14,7 +14,6 @@ const Auth = () => {
 	const { register, handleSubmit } = useForm()
 	const router = useRouter()
 
-
 	const login = async (e: AuthProps) => {
 		const user = e.name.trim()
 		const pass = e.senha.trim()
@@ -46,16 +45,16 @@ const Auth = () => {
 			</div>
 			<form onSubmit={handleSubmit(login)} className="flex flex-col justify-center items-center gap-5 mb-20">
 				<Inputs register={register("name")} icon={FaUserAlt} placeholder="Username" />
-				<Inputs register={register("senha")} icon={FaKey} placeholder="Password" pass/>
+				<Inputs register={register("senha")} icon={FaKey} placeholder="Password" pass />
 
 				<div className="flex gap-10 justify-center items-center mt-2 text-xl flex-wrap">
-					<button
-						className="border-2 border-gray-500 px-5 py-3 bg-white text-gray-600 rounded-2xl w-32"
-						onClick={goToRegister}>
-						Registrar
-					</button>
 					<button className="border-2 border-green-700 px-5 py-3 bg-green-400 text-green-800 rounded-2xl w-32">
 						Login
+					</button>
+					<button
+						className="border-2 border-gray-500 px-5 py-3 bg-white text-gray-600 rounded-2xl w-32 order-first"
+						onClick={goToRegister}>
+						Registrar
 					</button>
 				</div>
 			</form>
