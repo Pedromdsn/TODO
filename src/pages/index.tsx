@@ -46,11 +46,9 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 		})
 
 		if (res.data.status == Status.OK) {
-			const temp = []
-			todos.forEach((e) => {
-				if (e.id == id) e.complete = complete
-				temp.push(e)
-			})
+			const temp = [...todos]
+			const item = temp.find(item => item.id === id);
+			item.complete = complete
 
 			return setTodos(temp)
 		}
