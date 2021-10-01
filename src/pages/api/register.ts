@@ -24,9 +24,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.catch((e: PrismaClientKnownRequestError) => {
 			error = true
-			return e.code == "P2002" ? res.send({ status: Status.DUPLICATED_NAME }) : res.send({ status: Status.BAD_REQUEST })
+			return e.code == "P2002"
+				? res.send({ status: Status.DUPLICATED_NAME })
+				: res.send({ status: Status.BAD_REQUEST })
 		})
-	console.log(user);
-	
+	console.log(user)
+
 	if (!error) return res.send({ status: Status.OK })
 }

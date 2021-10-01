@@ -25,7 +25,7 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 		})
 		if (res.data.status == Status.OK) return setTodos([res.data.createTodo, ...todos])
 		if (res.data.status == Status.INVALID_TOKEN) return router.push("/auth")
-		console.log(res.data);
+		console.log(res.data)
 	}
 
 	const remove = async (id: number) => {
@@ -36,8 +36,7 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 		})
 		if (res.data.status == Status.OK) return setTodos([...todos.filter((e) => e.id != id)])
 		if (res.data.status == Status.INVALID_TOKEN) return router.push("/auth")
-		console.log(res.data);
-		
+		console.log(res.data)
 	}
 
 	return (
