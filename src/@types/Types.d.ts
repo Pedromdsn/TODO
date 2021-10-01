@@ -17,12 +17,7 @@ type TodoPropsIndex = {
 	id: number
 	todo: string
 	authorID: number
-}
-
-type TodoComponentProps = {
-	id: number
-	todo: string
-	remove: any
+	complete: boolean
 }
 
 type InputsProps = {
@@ -30,4 +25,10 @@ type InputsProps = {
 	icon: IconType
 	placeholder: string
 	pass?: boolean = false
+}
+
+type TodoComponentProps = {
+	todo: TodoPropsIndex
+	removeFun: any
+	completeFun: any
 }

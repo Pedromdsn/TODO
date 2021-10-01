@@ -28,7 +28,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				? res.send({ status: Status.DUPLICATED_NAME })
 				: res.send({ status: Status.BAD_REQUEST })
 		})
-	console.log(user)
 
 	if (!error) return res.send({ status: Status.OK })
 }

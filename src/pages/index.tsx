@@ -25,7 +25,7 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 		})
 		if (res.data.status == Status.OK) return setTodos([res.data.createTodo, ...todos])
 		if (res.data.status == Status.INVALID_TOKEN) return router.push("/auth")
-		console.log(res.data)
+		console.log(res.data.status)
 	}
 
 	const remove = async (id: number) => {
@@ -36,7 +36,26 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 		})
 		if (res.data.status == Status.OK) return setTodos([...todos.filter((e) => e.id != id)])
 		if (res.data.status == Status.INVALID_TOKEN) return router.push("/auth")
-		console.log(res.data)
+		console.log(res.data.status)
+	}
+
+	const complete = async (id: number, complete: boolean) => {
+		const res = await axios.put("/api/todo", {
+			id: id,
+			complete: complete,
+		})
+
+		if (res.data.status == Status.OK) {
+			const temp = []
+			todos.forEach((e) => {
+				if (e.id == id) e.complete = complete
+				temp.push(e)
+			})
+
+			return setTodos(temp)
+		}
+		if (res.data.status == Status.INVALID_TOKEN) return router.push("/auth")
+		console.log(res.data.status)
 	}
 
 	return (
@@ -56,7 +75,7 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 			</div>
 			<div className="mt-10 flex flex-col gap-3">
 				{todos.map((e) => (
-					<Todo todo={e.todo} key={e.id} id={e.id} remove={remove} />
+					<Todo key={e.id} todo={e} removeFun={remove} completeFun={complete} />
 				))}
 			</div>
 		</div>
