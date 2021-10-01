@@ -21,8 +21,8 @@ const Auth = () => {
 		const id = toast.loading("Please wait...", { position: "bottom-right", autoClose: 5000 })
 
 		const login = await axios.post("/api/auth", {
-			user,
-			pass,
+			name: user,
+			pass: pass,
 		})
 
 		if (login.data.status == Status.OK) {
