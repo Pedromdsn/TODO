@@ -1,4 +1,4 @@
-import md5 from "md5"
+import bcrypt from "bcrypt"
 
 import { NextApiRequest, NextApiResponse } from "next"
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime"
@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		.create({
 			data: {
 				name: name,
-				pass: md5(pass),
+				pass: bcrypt.hashSync(pass, +process.env.SALT!!),
 			},
 		})
 		.catch((e: PrismaClientKnownRequestError) => {

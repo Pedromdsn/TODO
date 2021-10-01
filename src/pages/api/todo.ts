@@ -3,7 +3,9 @@ import jwt from "jsonwebtoken"
 import { NextApiRequest, NextApiResponse } from "next"
 import { parseCookies } from "nookies"
 import { Status } from "../../@types/Enum"
-import { prisma } from "../../libs/Prisma"
+import { prisma as prismaClientStarted } from "../../libs/Prisma"
+
+const prisma = prismaClientStarted
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { todo: todoText, id }: { todo: string; id: number } = req.body

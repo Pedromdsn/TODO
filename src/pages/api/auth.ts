@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import md5 from "md5"
+import bcrypt from "bcrypt"
 
 import { prisma } from "../../libs/Prisma"
 import { NextApiRequest, NextApiResponse } from "next"
@@ -14,11 +14,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const user = await prisma.user.findFirst({
 		where: {
 			name: name,
-			pass: md5(pass),
 		},
 	})
 
-	if (!user) return res.send({ status: Status.INVALID_TOKEN })
+	if (!user) return res.send({ status: Status.NOT_FOUND })
+	if (!bcrypt.compareSync(pass, user.pass)) return res.send({ status: Status.NOT_ALLOWED })
 
 	const token = jwt.sign({ id: user.id }, process.env.TOKEN!!, { expiresIn: tokenTime })
 

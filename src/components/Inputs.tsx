@@ -8,6 +8,7 @@ const Inputs = (props: InputsProps) => {
 				placeholder={props.placeholder}
 				className="outline-none pl-5 w-60 text-xl"
 				required
+				
 			/>
 		</div>
 	)
