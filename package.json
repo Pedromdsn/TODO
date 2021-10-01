@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "@prisma/client": "^3.1.1",
-    "@types/bcrypt": "^5.0.0",
     "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
@@ -20,8 +19,8 @@
     "react-toastify": "^8.0.3"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/jsonwebtoken": "^8.5.5",
-    "@types/md5": "^2.3.1",
     "@types/react": "^17.0.24",
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.5",
