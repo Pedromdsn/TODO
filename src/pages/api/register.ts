@@ -25,6 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			error = true
 			return e.code == "P2002" ? res.send({ status: "Name exists" }) : res.send({ status: "Bad Request" })
 		})
-		
+	console.log(user);
+	
 	if (!error) return res.send({ status: "Ok" })
 }

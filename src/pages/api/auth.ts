@@ -5,7 +5,7 @@ import { prisma } from "../../libs/Prisma"
 import { NextApiRequest, NextApiResponse } from "next"
 import { setCookie } from "nookies"
 
-const tokenTime = 60 * 5 // 5 Minutes
+const tokenTime = 30 // 5 Minutes
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { name, pass } = req.body

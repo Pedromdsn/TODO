@@ -14,6 +14,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		return decoded
 	})
 
+	console.log(tokenDecoded?.id);
+	console.log(!tokenDecoded?.id);
+	
 	if (!tokenDecoded?.id) return res.redirect("/auth")
 
 	switch (req.method) {
@@ -27,7 +30,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 			})
 
-			return res.send({ status: "OK", createTodo: createTodo })
+			return res.send({ status: "Ok", createTodo: createTodo })
 		case "DELETE":
 			const todo = await prisma.todo.findFirst({
 				where: {
@@ -46,7 +49,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				})
 				.catch((e) => console.log(e))
 
-			return res.send({ status: "OK" })
+			return res.send({ status: "Ok" })
 		default:
 			res.send({ status: "Not Allowed" })
 	}

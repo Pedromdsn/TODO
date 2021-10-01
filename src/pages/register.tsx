@@ -43,6 +43,8 @@ const Auth = () => {
 				toast.update(id, { render: "Unexpected error", type: "error", isLoading: false, autoClose: 5000 })
 				return
 		}
+
+		router.push("/")
 	}
 
 	const goToAuth = (e) => {

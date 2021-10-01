@@ -20,21 +20,16 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 		const res = await axios.post("/api/todo", {
 			todo: e.todo,
 		})
-		if (res.data.status == "Ok") setTodos([...todos, res.data])
+		if (res.data.status == "Ok") setTodos([res.data.createTodo, ...todos])
 	}
 
 	const remove = async (id: number) => {
-		const temp = todos.filter((e) => e.id == id)[0]
-		setTodos([...todos.filter((e) => e.id != id)])
 		const res = await axios.delete("/api/todo", {
 			data: {
 				id: id,
 			},
 		})
-		if (res.data.status == "Ok") {
-			//todo: error message
-			setTodos([...todos, temp])
-		}
+		if (res.data.status == "Ok") setTodos([...todos.filter((e) => e.id != id)])
 	}
 
 	return (
@@ -53,7 +48,7 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 				</form>
 			</div>
 			<div className="mt-10 flex flex-col gap-3">
-				{todos.reverse().map((e) => (
+				{todos.map((e) => (
 					<Todo todo={e.todo} key={e.id} id={e.id} remove={remove} />
 				))}
 			</div>
@@ -84,7 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 	return {
 		props: {
-			data,
+			data: data.reverse(),
 		},
 	}
 }
