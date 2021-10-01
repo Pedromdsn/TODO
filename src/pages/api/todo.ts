@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken"
 
 import { NextApiRequest, NextApiResponse } from "next"
 import { parseCookies } from "nookies"
+import { Status } from "../../@types/Enum"
 import { prisma } from "../../libs/Prisma"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,14 +15,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		return decoded
 	})
 
-	console.log(tokenDecoded?.id);
-	console.log(!tokenDecoded?.id);
-	
-	if (!tokenDecoded?.id) return res.redirect("/auth")
+	if (!tokenDecoded?.id) return res.send({ status: Status.INVALID_TOKEN })
 
 	switch (req.method) {
 		case "POST":
-			if (todoText.trim().length == 0) return res.send({ status: "Todo Empty" })
+			if (todoText.trim().length == 0) return res.send({ status: Status.TODO_EMPTY })
 
 			const createTodo = await prisma.todo.create({
 				data: {
@@ -30,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 			})
 
-			return res.send({ status: "Ok", createTodo: createTodo })
+			return res.send({ status: Status.OK, createTodo: createTodo })
 		case "DELETE":
 			const todo = await prisma.todo.findFirst({
 				where: {
@@ -39,7 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 			})
 
-			if (!todo) return res.send({ status: "Todo not found" })
+			if (!todo) return res.send({ status: Status.NOT_FOUND })
 
 			await prisma.todo
 				.delete({
@@ -49,8 +47,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				})
 				.catch((e) => console.log(e))
 
-			return res.send({ status: "Ok" })
+			return res.send({ status: Status.OK })
 		default:
-			res.send({ status: "Not Allowed" })
+			res.send({ status: Status.NOT_ALLOWED })
 	}
 }

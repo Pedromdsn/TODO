@@ -4,8 +4,9 @@ import md5 from "md5"
 import { prisma } from "../../libs/Prisma"
 import { NextApiRequest, NextApiResponse } from "next"
 import { setCookie } from "nookies"
+import { Status } from "../../@types/Enum"
 
-const tokenTime = 30 // 5 Minutes
+const tokenTime = 10 * 60 // 10 Minutes
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { name, pass } = req.body
@@ -17,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		},
 	})
 
-	if (!user) return res.send({ status: "Not Exists" })
+	if (!user) return res.send({ status: Status.INVALID_TOKEN })
 
 	const token = jwt.sign({ id: user.id }, process.env.TOKEN!!, { expiresIn: tokenTime })
 
@@ -26,5 +27,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		path: "/",
 	})
 
-	return res.send({ status: "Ok" })
+	return res.send({ status: Status.OK })
 }

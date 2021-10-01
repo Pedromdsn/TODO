@@ -11,16 +11,21 @@ import { useForm } from "react-hook-form"
 import { useState } from "react"
 
 import "react-toastify/dist/ReactToastify.css"
+import { useRouter } from "next/dist/client/router"
+import { Status } from "../@types/Enum"
 
 export default function Home({ data }: { data: TodoPropsIndex[] }) {
 	const { register, handleSubmit } = useForm()
 	const [todos, setTodos] = useState<TodoPropsIndex[]>(data)
+	const router = useRouter()
 
 	const add = async (e: TodoReceivedProps) => {
 		const res = await axios.post("/api/todo", {
 			todo: e.todo,
 		})
-		if (res.data.status == "Ok") setTodos([res.data.createTodo, ...todos])
+		if (res.data.status == Status.OK) return setTodos([res.data.createTodo, ...todos])
+		if (res.data.status == Status.INVALID_TOKEN) return router.push("/auth")
+		console.log(res.data);
 	}
 
 	const remove = async (id: number) => {
@@ -29,7 +34,10 @@ export default function Home({ data }: { data: TodoPropsIndex[] }) {
 				id: id,
 			},
 		})
-		if (res.data.status == "Ok") setTodos([...todos.filter((e) => e.id != id)])
+		if (res.data.status == Status.OK) return setTodos([...todos.filter((e) => e.id != id)])
+		if (res.data.status == Status.INVALID_TOKEN) return router.push("/auth")
+		console.log(res.data);
+		
 	}
 
 	return (

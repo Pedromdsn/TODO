@@ -8,6 +8,7 @@ import { FaUserAlt, FaKey } from "react-icons/fa"
 import { toast, ToastContainer } from "react-toastify"
 
 import "react-toastify/dist/ReactToastify.css"
+import { Status } from "../@types/Enum"
 
 const Auth = () => {
 	const { register, handleSubmit } = useForm()
@@ -33,10 +34,10 @@ const Auth = () => {
 		})
 
 		switch (res.data.status) {
-			case "Ok":
+			case Status.OK:
 				 toast.update(id, { render: "Registered", type: "success", isLoading: false, autoClose: 5000 })
 				 break
-			case "Name exists":
+			case Status.DUPLICATED_NAME:
 				toast.update(id, { render: "Username in use", type: "error", isLoading: false, autoClose: 5000 })
 				return
 			default:

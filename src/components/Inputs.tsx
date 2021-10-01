@@ -1,6 +1,3 @@
-import { IconType } from "react-icons"
-
-
 const Inputs = (props: InputsProps) => {
 	return (
 		<div className="flex px-8 py-4 bg-white items-center rounded-3xl focus-within:ring-2 ring-gray-400">

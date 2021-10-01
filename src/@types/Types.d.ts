@@ -25,7 +25,7 @@ type TodoComponentProps = {
 	remove: any
 }
 
-interface InputsProps {
+type InputsProps = {
 	register: any
 	icon: IconType
 	placeholder: string
