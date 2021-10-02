@@ -19,6 +19,7 @@
     "react-toastify": "^8.0.3"
   },
   "devDependencies": {
+    "@types/nookies": "^2.0.3",
     "@types/bcrypt": "^5.0.0",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/react": "^17.0.24",
