@@ -25,6 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const token = jwt.sign({ id: user.id }, process.env.TOKEN!!, { expiresIn: tokenTime })
 
 	setCookie({ res }, "TokenSenior", token, {
+		httpsOnly: true,
 		maxAge: tokenTime,
 		path: "/",
 	})
