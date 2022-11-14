@@ -23,6 +23,6 @@ In the styling of the site was used [Tailwindcss](https://tailwindcss.com/).
 
 ## Contact
 
-Discord: Coco Blanco#3873
+Discord: ! Pedromdsn
 
-Site: https://cocoblanco.fun
+Site: https://pedromdsn.com
